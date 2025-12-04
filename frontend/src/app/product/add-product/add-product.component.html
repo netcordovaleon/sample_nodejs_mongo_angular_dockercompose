@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <h2>Registro productos</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="submit()">
+    <div class="form-field">
+      <label for="name">Nombre</label><br />
+      <input class="form-control" id="name" type="text" formControlName="name" />
+      <div *ngIf="name?.touched && name?.invalid" class="error">
+        <div *ngIf="name?.errors?.['required']">El nombre es obligatorio.</div>
+        <div *ngIf="name?.errors?.['maxlength']">Máximo 120 caracteres.</div>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="description">Descripción</label><br />
+      <textarea class="form-control" id="description" formControlName="description" rows="3"></textarea>
+      <div *ngIf="description?.touched && description?.invalid" class="error">
+        <div *ngIf="description?.errors?.['required']">La descripción es obligatoria.</div>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="price">Precio</label><br />
+      <input class="form-control" id="price" type="number" formControlName="price" step="0.01" />
+      <div *ngIf="price?.touched && price?.invalid" class="error">
+        <div *ngIf="price?.errors?.['required']">El precio es obligatorio.</div>
+        <div *ngIf="price?.errors?.['min']">El precio debe ser mayor o igual a 0.</div>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="stock">Stock</label><br />
+      <input class="form-control" id="stock" type="number" formControlName="stock" />
+      <div *ngIf="stock?.touched && stock?.invalid" class="error">
+        <div *ngIf="stock?.errors?.['required']">El stock es obligatorio.</div>
+        <div *ngIf="stock?.errors?.['min']">El stock no puede ser negativo.</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" type="submit" [disabled]="productForm.invalid || submitting">Guardar</button>&nbsp;
+      <button class="btn btn-secondary" type="button" (click)="cancel()" [disabled]="submitting">Volver al listado</button>
+    </div>
+  </form>
+</div>

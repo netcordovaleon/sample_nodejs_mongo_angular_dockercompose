@@ -1,0 +1,39 @@
+<div class="container mt-5">
+  <h2>Listado de Productos</h2>
+
+  <div *ngIf="loading">Cargando productos...</div>
+
+  <table *ngIf="!loading && products.length > 0" class="table" aria-describedby="products-table">
+    <thead>
+      <tr>
+        <th>_id</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Creado</th>
+        <th>Actualizado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products">
+        <td>{{ p._id }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.description || '-' }}</td>
+        <td>{{ p.price | number:'1.2-2' }}</td>
+        <td>{{ p.stock ?? 0 }}</td>
+        <td>{{ p.createdAt ? (p.createdAt | date:'short') : '-' }}</td>
+        <td>{{ p.updatedAt ? (p.updatedAt | date:'short') : '-' }}</td>
+        <td class="actions">
+          <button class="btn btn-success" (click)="onEdit(p._id)">Editar</button>&nbsp;
+          <button class="btn btn-danger" (click)="onDelete(p._id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && products.length === 0">
+    No hay productos para mostrar.
+  </div>
+</div>
