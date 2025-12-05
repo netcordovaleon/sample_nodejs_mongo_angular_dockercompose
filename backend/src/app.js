@@ -27,7 +27,6 @@ app.get('/', (req, res) => res.send('Products API running'));
 
 
 // Connect DB and start
-//mongoose.set('strictQuery', false);
 mongoose.connect(MONGO_URI)
 .then(() => {
     console.log('Connected to MongoDB');
